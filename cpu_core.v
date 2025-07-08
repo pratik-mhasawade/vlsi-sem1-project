@@ -2,7 +2,43 @@
 module cpu_core (
     input  wire clk,
     input  wire reset
+
+    // Wishbone master interface
+    output wire [31:0] wb_addr,
+    output wire [31:0] wb_data_out,
+    input  wire [31:0] wb_data_in,
+    output wire        wb_we,
+    output wire        wb_stb,
+    output wire        wb_cyc,
+    input  wire        wb_ack,
 );
+
+
+    // Internal wires
+    wire [31:0] alu_result;
+    wire [31:0] write_data;
+    wire [31:0] mem_data_out;
+    wire        mem_read;
+    wire        mem_write;
+
+    
+    // Instantiate MEM stage with Wishbone signals
+    mem_stage mem_stage_inst (
+        .clk(clk),
+        .rst(rst),
+        .mem_read(mem_read),
+        .mem_write(mem_write),
+        .alu_result(alu_result),
+        .write_data(write_data),
+        .mem_read_data(mem_data_out),
+        .wb_addr(wb_addr),
+        .wb_data_out(wb_data_out),
+        .wb_data_in(wb_data_in),
+        .wb_we(wb_we),
+        .wb_stb(wb_stb),
+        .wb_cyc(wb_cyc),
+        .wb_ack(wb_ack)
+    );
 
     // ----------------- IF Stage -----------------
     wire [31:0] pc_current, pc_next, instruction;
@@ -107,4 +143,50 @@ module cpu_core (
         .writeback_data(writeback_data)
     );
 
+endmodule
+
+
+
+
+// src/core/cpu_core.v (partial update - connecting Wishbone signals)
+module cpu_core (
+    input  wire        clk,
+    input  wire        rst,
+    // Wishbone master interface
+    output wire [31:0] wb_addr,
+    output wire [31:0] wb_data_out,
+    input  wire [31:0] wb_data_in,
+    output wire        wb_we,
+    output wire        wb_stb,
+    output wire        wb_cyc,
+    input  wire        wb_ack,
+    // ... other signals
+);
+
+    // Internal wires
+    wire [31:0] alu_result;
+    wire [31:0] write_data;
+    wire [31:0] mem_data_out;
+    wire        mem_read;
+    wire        mem_write;
+
+    // Instantiate MEM stage with Wishbone signals
+    mem_stage mem_stage_inst (
+        .clk(clk),
+        .rst(rst),
+        .mem_read(mem_read),
+        .mem_write(mem_write),
+        .alu_result(alu_result),
+        .write_data(write_data),
+        .mem_read_data(mem_data_out),
+        .wb_addr(wb_addr),
+        .wb_data_out(wb_data_out),
+        .wb_data_in(wb_data_in),
+        .wb_we(wb_we),
+        .wb_stb(wb_stb),
+        .wb_cyc(wb_cyc),
+        .wb_ack(wb_ack)
+    );
+
+    // ... remaining pipeline stages, control, register file, etc.
 endmodule
