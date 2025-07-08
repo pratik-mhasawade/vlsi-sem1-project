@@ -50,22 +50,22 @@ The `control_unit.v` generates all control signals based on instruction opcode:
 ## 📁 Project Structure
 ---
 
-riscv_microcontroller/
-├── src/
-│ ├── core/
-│ │ ├── cpu_core.v
-│ │ ├── pc.v
-│ │ ├── alu.v
-│ │ ├── alu_control.v
-│ │ ├── ex_stage.v
-│ │ ├── id_stage.v
-│ │ ├── wb_stage.v
-│ │ ├── control_unit.v
-│ │ ├── register_file.v
-│ │ ├── mem_stage.v
-│ ├── memory/
-│ │ └── instr_rom.v
-├── sim/
-│ ├── cpu_tb.v
-│ └── instr_mem.hex
-├── README.md
+-riscv_microcontroller/
+-├── src/
+-│ ├── core/
+-│ │ ├── cpu_core.v
+-│ │ ├── pc.v
+-│ │ ├── alu.v
+-│ │ ├── alu_control.v
+-│ │ ├── ex_stage.v
+-│ │ ├── id_stage.v
+-│ │ ├── wb_stage.v
+-│ │ ├── control_unit.v
+-│ │ ├── register_file.v
+-│ │ ├── mem_stage.v
+-│ ├── memory/
+-│ │ └── instr_rom.v
+-├── sim/
+-│ ├── cpu_tb.v
+-│ └── instr_mem.hex
+-├── README.md
