@@ -69,3 +69,5 @@ The `control_unit.v` generates all control signals based on instruction opcode:
 -│ ├── cpu_tb.v
 -│ └── instr_mem.hex
 -├── README.md
+
+---
